@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fil">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071743">
+  <meta name="description" content="A little birthday surprise in blue!">
+  <title>Buksan Mo Ito! 🎁💙</title>
+  <style>
+    :root { color-scheme: dark; font-family: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif; }
+    * {box-sizing:border-box}
+    body {margin:0; min-height:100svh; overflow-x:hidden; color:#fff; background: radial-gradient(circle at 20% 20%,#245fd6 0%,transparent 37%),radial-gradient(circle at 80% 75%,#1c80c7 0%,transparent 43%),linear-gradient(135deg,#071239,#0b2b72 60%,#07173b); display:grid;place-items:center;padding:28px 16px}
+    .stars {position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#c7e9ff 1px,transparent 1px);background-size:43px 43px;opacity:.23}
+    .orb {position:fixed;border-radius:50%;filter:blur(4px);opacity:.27;pointer-events:none}
+    .orb.one{width:220px;height:220px;background:#49c5ff;left:-110px;top:16%}
+    .orb.two{width:300px;height:300px;background:#4369ff;right:-140px;bottom:7%}
+    main {isolation:isolate;position:relative;width:min(100%,500px);text-align:center;padding:40px 28px 36px;border:1px solid rgba(216,239,255,.32);border-radius:30px;background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.06));box-shadow:0 24px 90px rgba(0,0,0,.38);backdrop-filter:blur(18px)}
+    .eyebrow{margin:0 0 22px;letter-spacing:.24em;font-size:12px;font-weight:800;color:#bde5ff}
+    .gift{font-size:78px;display:block;filter:drop-shadow(0 8px 18px rgba(0,0,0,.2));animation:bob 2.6s ease-in-out infinite}
+    h1{font-size:clamp(30px,8vw,44px);line-height:1.14;margin:20px 0 12px;letter-spacing:-.03em}
+    p{font-size:17px;line-height:1.6;color:#e1f2ff;margin:10px 0 24px}
+    button{border:none;border-radius:100px;background:linear-gradient(90deg,#f7fcff,#b7dfff);color:#093572;font:800 16px inherit;font-family:inherit;font-size:16px;font-weight:800;padding:16px 29px;cursor:pointer;box-shadow:0 8px 26px rgba(100,181,255,.35);transition:transform .2s,box-shadow .2s}
+    button:hover,button:focus-visible{transform:translateY(-3px);box-shadow:0 12px 34px rgba(100,181,255,.5)}
+    button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .note{font-size:13px;color:#b8dbfa;margin:20px 0 0}
+    #reveal[hidden],#intro[hidden]{display:none}
+    .reveal{animation:arrive .75s both}
+    .big{font-size:60px;display:block;margin-bottom:4px}
+    .highlight{color:#a9e4ff}
+    .message{background:rgba(2,19,62,.3);border:1px solid rgba(200,231,255,.2);border-radius:18px;padding:16px;margin-bottom:23px}
+    .message p{margin:0;font-size:16px}
+    .confetti{position:fixed;top:-25px;left:0;z-index:10;pointer-events:none;animation:fall linear forwards}
+    @keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));opacity:0}}
+    @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+    @keyframes arrive{from{transform:scale(.88) translateY(15px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div><div class="orb one" aria-hidden="true"></div><div class="orb two" aria-hidden="true"></div>
+  <main>
+    <section id="intro">
+      <p class="eyebrow">A LITTLE BLUE SURPRISE ✨</p>
+      <span class="gift" aria-hidden="true">🎁</span>
+      <h1>May sorpresa ako! 💙</h1>
+      <p>May bubuksan kang espesyal na surpresa! Ready ka na ba? 🥳</p>
+      <button type="button" id="open">Buksan ang Regalo 🎁</button>
+      <p class="note">Pindutin mo ang button para makita ang surprise!</p>
+    </section>
+    <section id="reveal" class="reveal" hidden aria-live="polite">
+      <p class="eyebrow">SURPRISE! 🎉</p>
+      <span class="big" aria-hidden="true">🎂💙🎊</span>
+      <h1>Birthday ko <span class="highlight">bukas!</span></h1>
+      <div class="message"><p>Ano'ng regalo mo sa akin? 🎁😆<br><br>Accepting gifts, greetings, at virtual hugs! 💙✨</p></div>
+      <button type="button" id="again">More Sprinkles! 🎉</button>
+      <p class="note">Made with 💙 just for you.</p>
+    </section>
+  </main>
+  <script>
+    const intro=document.getElementById('intro');
+    const reveal=document.getElementById('reveal');
+    function confetti(){
+      const colors=['#93c5fd','#38bdf8','#fff','#f9d56e','#b6eaff','#a5b4fc'];
+      for(let i=0;i<110;i++){
+        const el=document.createElement('i');
+        el.className='confetti';
+        el.setAttribute('aria-hidden','true');
+        el.style.left=Math.random()*100+'vw';
+        el.style.width=(5+Math.random()*9)+'px';
+        el.style.height=(7+Math.random()*12)+'px';
+        el.style.background=colors[Math.floor(Math.random()*colors.length)];
+        el.style.borderRadius=Math.random()>.5?'50%':'2px';
+        el.style.setProperty('--drift',(Math.random()*220-110)+'px');
+        el.style.setProperty('--spin',(Math.random()*1200-600)+'deg');
+        el.style.animationDuration=(2.5+Math.random()*3)+'s';
+        el.style.animationDelay=(Math.random()*1.2)+'s';
+        document.body.append(el);
+        el.addEventListener('animationend',()=>el.remove(),{once:true});
+      }
+    }
+    document.getElementById('open').addEventListener('click',()=>{
+      intro.hidden=true;reveal.hidden=false;confetti();
+    });
+    document.getElementById('again').addEventListener('click',confetti);
+  </script>
+</body>
+</html>
